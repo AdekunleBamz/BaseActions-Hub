@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import Link from "next/link";
@@ -9,8 +10,17 @@ import { BaseActionsHubABI } from "@/config/abis";
 
 export default function SignPage() {
   const { isConnected, address } = useAccount();
+  const searchParams = useSearchParams();
   const [guestbookOwner, setGuestbookOwner] = useState("");
   const [message, setMessage] = useState("");
+
+  // Pre-fill owner from URL query param
+  useEffect(() => {
+    const owner = searchParams.get("owner");
+    if (owner) {
+      setGuestbookOwner(owner);
+    }
+  }, [searchParams]);
 
   const { data: hash, writeContract, isPending, error } = useWriteContract();
 
