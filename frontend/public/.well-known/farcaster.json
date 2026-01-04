@@ -17,11 +17,15 @@
     "splashBackgroundColor": "#0a0a0f",
     "webhookUrl": "https://base-actions-hub.vercel.app/api/webhook",
     "primaryCategory": "social",
-    "tags": ["guestbook", "base", "blockchain", "nft", "badges", "leaderboard"],
+    "tags": ["guestbook", "base", "blockchain", "nft", "badges"],
     "heroImageUrl": "https://base-actions-hub.vercel.app/og-image.png",
-    "tagline": "Leave your mark on Base blockchain",
-    "ogTitle": "BaseActions Hub - Sign the Guestbook on Base",
+    "tagline": "Sign the guestbook on Base",
+    "ogTitle": "BaseActions Hub",
     "ogDescription": "A decentralized guestbook on Base blockchain. Sign messages, earn badges, and climb the leaderboard.",
-    "ogImageUrl": "https://base-actions-hub.vercel.app/og-image.png"
+    "ogImageUrl": "https://base-actions-hub.vercel.app/og-image.png",
+    "screenshotUrls": [
+      "https://base-actions-hub.vercel.app/og-image.png"
+    ],
+    "castShareUrl": "https://base-actions-hub.vercel.app"
   }
 }
