@@ -5,7 +5,7 @@ import { Providers } from "@/providers/Web3Provider";
 export const metadata: Metadata = {
   title: "BaseActions Hub - Sign Guestbooks on Base",
   description: "Sign on-chain guestbooks, earn achievement badges as NFTs, and climb the leaderboard on Base blockchain.",
-  metadataBase: new URL("https://baseactions-hub.vercel.app"),
+  metadataBase: new URL("https://base-actions-hub.vercel.app"),
   icons: {
     icon: [
       { url: "/favicon.png", sizes: "32x32", type: "image/png" },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: "A decentralized guestbook on Base blockchain. Sign messages, earn badges, and climb the leaderboard.",
     images: ["/og-image.png"],
     type: "website",
-    url: "https://baseactions-hub.vercel.app",
+    url: "https://base-actions-hub.vercel.app",
   },
   twitter: {
     card: "summary_large_image",
@@ -29,11 +29,11 @@ export const metadata: Metadata = {
   },
   other: {
     "fc:frame": "vNext",
-    "fc:frame:image": "https://baseactions-hub.vercel.app/og-image.png",
+    "fc:frame:image": "https://base-actions-hub.vercel.app/og-image.png",
     "fc:frame:image:aspect_ratio": "1.91:1",
     "fc:frame:button:1": "Sign Guestbook",
     "fc:frame:button:1:action": "launch_frame",
-    "fc:frame:button:1:target": "https://baseactions-hub.vercel.app",
+    "fc:frame:button:1:target": "https://base-actions-hub.vercel.app",
   },
 };
 

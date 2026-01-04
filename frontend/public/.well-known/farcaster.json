@@ -9,19 +9,19 @@
     "name": "BaseActions Hub",
     "subtitle": "Sign the Guestbook on Base",
     "description": "A decentralized guestbook on Base blockchain where you can sign messages, earn badges, climb the leaderboard, and connect with the community.",
-    "iconUrl": "https://baseactions-hub.vercel.app/icon-512.png",
-    "homeUrl": "https://baseactions-hub.vercel.app",
-    "imageUrl": "https://baseactions-hub.vercel.app/og-image.png",
+    "iconUrl": "https://base-actions-hub.vercel.app/icon-512.png",
+    "homeUrl": "https://base-actions-hub.vercel.app",
+    "imageUrl": "https://base-actions-hub.vercel.app/og-image.png",
     "buttonTitle": "Sign Guestbook",
-    "splashImageUrl": "https://baseactions-hub.vercel.app/splash.png",
+    "splashImageUrl": "https://base-actions-hub.vercel.app/splash.png",
     "splashBackgroundColor": "#0a0a0f",
-    "webhookUrl": "https://baseactions-hub.vercel.app/api/webhook",
+    "webhookUrl": "https://base-actions-hub.vercel.app/api/webhook",
     "primaryCategory": "social",
     "tags": ["guestbook", "base", "blockchain", "nft", "badges", "leaderboard"],
-    "heroImageUrl": "https://baseactions-hub.vercel.app/og-image.png",
+    "heroImageUrl": "https://base-actions-hub.vercel.app/og-image.png",
     "tagline": "Leave your mark on Base blockchain",
     "ogTitle": "BaseActions Hub - Sign the Guestbook on Base",
     "ogDescription": "A decentralized guestbook on Base blockchain. Sign messages, earn badges, and climb the leaderboard.",
-    "ogImageUrl": "https://baseactions-hub.vercel.app/og-image.png"
+    "ogImageUrl": "https://base-actions-hub.vercel.app/og-image.png"
   }
 }
