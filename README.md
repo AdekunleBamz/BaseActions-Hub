@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BaseActions Hub
+
+A decentralized guestbook and leaderboard dApp built on Base. Sign guestbooks, earn badges, climb the leaderboard, and interact with multiple smart contracts in a single transaction.
+
+## Features
+
+- 📝 **Guestbook** - Sign guestbooks with custom messages
+- 🏆 **Leaderboard** - Track top signers and earn points
+- 🎖️ **Badges** - Earn NFT badges for achievements
+- ⚡ **Multi-Contract Actions** - One transaction interacts with 3+ contracts
+
+## Live Demo
+
+[https://base-actions-hub.vercel.app](https://base-actions-hub.vercel.app)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+git clone https://github.com/AdekunleBamz/BaseActions-Hub.git
+cd BaseActions-Hub
+npm install
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Smart Contracts (Base Mainnet)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Contract | Address |
+|----------|---------|
+| BaseActionsHub | `0x7de391745702d84C1e88ac80d19cfd748b3Fe5D1` |
+| Guestbook | `0xca42701231170d21311897908b1Ba0BDA5003f8b` |
+| BadgeNFT | `0x509d96ECd357b9D6bF2E4287172F3f777E587ca1` |
+| Leaderboard | `0xF78Dc0c57153bC09810bA2aA174a261Cec2559eB` |
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend**: Next.js 14, React, TailwindCSS
+- **Blockchain**: Base (Ethereum L2)
+- **Wallet**: RainbowKit, wagmi
+- **Farcaster**: Miniapp SDK integration
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/AdekunleBamz/BaseActions-Hub)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
