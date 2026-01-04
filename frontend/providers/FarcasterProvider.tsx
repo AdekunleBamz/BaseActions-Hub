@@ -60,24 +60,36 @@ export function FarcasterProvider({ children }: FarcasterProviderProps) {
   useEffect(() => {
     const initSDK = async () => {
       try {
-        // Check if we're in a Farcaster miniapp context
-        if (typeof window !== "undefined" && window.parent !== window) {
-          setIsInMiniApp(true);
+        // Check if we're in a Farcaster miniapp context (inside iframe)
+        const inMiniApp = typeof window !== "undefined" && window.parent !== window;
+        setIsInMiniApp(inMiniApp);
 
-          // Load the SDK context
-          const ctx = await sdk.context;
-          setContext(ctx);
-
-          // Signal that the app is ready
-          sdk.actions.ready();
-          setIsReady(true);
+        if (inMiniApp) {
+          // Load the SDK context with timeout
+          const ctx = await Promise.race([
+            sdk.context,
+            new Promise<null>((_, reject) => 
+              setTimeout(() => reject(new Error("SDK context timeout")), 5000)
+            )
+          ]);
+          
+          if (ctx) {
+            setContext(ctx as FrameContext);
+          }
         }
 
+        // Always call ready() - this tells Farcaster to hide the splash screen
+        // Call it within 5 seconds as required
+        sdk.actions.ready();
+        setIsReady(true);
         setIsSDKLoaded(true);
       } catch (err) {
         console.error("Failed to initialize Farcaster SDK:", err);
         setError(err instanceof Error ? err : new Error("Failed to initialize SDK"));
+        // Still mark as loaded and call ready to prevent infinite splash
+        sdk.actions.ready();
         setIsSDKLoaded(true);
+        setIsReady(true);
       }
     };
 
