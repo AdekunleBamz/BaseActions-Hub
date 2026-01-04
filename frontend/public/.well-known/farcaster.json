@@ -5,7 +5,7 @@
     "signature": "+Er9rdgTuPVN9K/njZuH7meM5uCRIMn3wt90vB1N7608y0dDTCAXBz9CXE6GTQn4gv7ZehQEpMpAhxl5eFSn9Rw="
   },
   "frame": {
-    "version": "1",
+    "version": "next",
     "name": "BaseActions Hub",
     "subtitle": "Sign the Guestbook on Base",
     "description": "A decentralized guestbook on Base blockchain where you can sign messages, earn badges, climb the leaderboard, and connect with the community.",

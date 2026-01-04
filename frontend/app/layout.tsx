@@ -28,12 +28,24 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   other: {
-    "fc:frame": "vNext",
-    "fc:frame:image": "https://base-actions-hub.vercel.app/og-image.png",
-    "fc:frame:image:aspect_ratio": "1.91:1",
-    "fc:frame:button:1": "Sign Guestbook",
-    "fc:frame:button:1:action": "launch_frame",
-    "fc:frame:button:1:target": "https://base-actions-hub.vercel.app",
+    // Farcaster Mini App embed tags
+    "of:version": "vNext",
+    "of:accepts:farcaster": "vNext",
+    "og:image": "https://base-actions-hub.vercel.app/og-image.png",
+    "fc:frame": JSON.stringify({
+      version: "next",
+      imageUrl: "https://base-actions-hub.vercel.app/og-image.png",
+      button: {
+        title: "Sign Guestbook",
+        action: {
+          type: "launch_frame",
+          name: "BaseActions Hub",
+          url: "https://base-actions-hub.vercel.app",
+          splashImageUrl: "https://base-actions-hub.vercel.app/splash.png",
+          splashBackgroundColor: "#0a0a0f"
+        }
+      }
+    }),
   },
 };
 
