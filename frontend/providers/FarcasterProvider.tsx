@@ -8,12 +8,14 @@ import {
   useCallback,
   ReactNode,
 } from "react";
-import sdk, { type Context } from "@farcaster/miniapp-sdk";
+import sdk from "@farcaster/miniapp-sdk";
+
+type FrameContext = Awaited<typeof sdk.context>;
 
 interface FarcasterContextType {
   isSDKLoaded: boolean;
   isInMiniApp: boolean;
-  context: Context | null;
+  context: FrameContext | null;
   isReady: boolean;
   error: Error | null;
   // Actions
@@ -51,7 +53,7 @@ interface FarcasterProviderProps {
 export function FarcasterProvider({ children }: FarcasterProviderProps) {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [isInMiniApp, setIsInMiniApp] = useState(false);
-  const [context, setContext] = useState<Context | null>(null);
+  const [context, setContext] = useState<FrameContext | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
