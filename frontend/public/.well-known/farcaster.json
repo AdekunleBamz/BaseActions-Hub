@@ -1,0 +1,17 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjAsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0",
+    "payload": "eyJkb21haW4iOiJiYXNlYWN0aW9ucy1odWIudmVyY2VsLmFwcCJ9",
+    "signature": "MHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw"
+  },
+  "frame": {
+    "version": "1",
+    "name": "BaseActions Hub",
+    "iconUrl": "https://baseactions-hub.vercel.app/icon-512.png",
+    "homeUrl": "https://baseactions-hub.vercel.app",
+    "imageUrl": "https://baseactions-hub.vercel.app/og-image.png",
+    "splashImageUrl": "https://baseactions-hub.vercel.app/splash.png",
+    "splashBackgroundColor": "#0a0a0f",
+    "webhookUrl": "https://baseactions-hub.vercel.app/api/webhook"
+  }
+}

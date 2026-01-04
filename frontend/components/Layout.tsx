@@ -4,9 +4,25 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useAccount, useConnect } from "wagmi";
+import { useEffect } from "react";
+import { useFarcaster } from "@/providers/FarcasterProvider";
 
 export function Header() {
   const pathname = usePathname();
+  const { isInMiniApp, isReady, displayName, pfpUrl } = useFarcaster();
+  const { address, isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
+
+  // Auto-connect in Farcaster miniapp
+  useEffect(() => {
+    if (isInMiniApp && isReady && !isConnected && connectors.length > 0) {
+      const frameConnector = connectors.find((c) => c.id === "farcasterFrame");
+      if (frameConnector) {
+        connect({ connector: frameConnector });
+      }
+    }
+  }, [isInMiniApp, isReady, isConnected, connectors, connect]);
 
   const navLinks = [
     { href: "/", label: "Home", icon: "🏠" },
@@ -52,8 +68,26 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Connect Button */}
-          <ConnectButton.Custom>
+          {/* Connect Button - Different for Farcaster miniapp */}
+          {isInMiniApp ? (
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10">
+              {pfpUrl ? (
+                <Image
+                  src={pfpUrl}
+                  alt={displayName || "User"}
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
+              ) : (
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500" />
+              )}
+              <span className="text-sm font-medium">
+                {displayName || (isConnected && address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connecting...")}
+              </span>
+            </div>
+          ) : (
+            <ConnectButton.Custom>
             {({
               account,
               chain,
@@ -115,6 +149,7 @@ export function Header() {
               );
             }}
           </ConnectButton.Custom>
+          )}
         </div>
 
         {/* Mobile Navigation */}
