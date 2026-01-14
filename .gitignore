@@ -42,3 +42,6 @@ next-env.d.ts
 
 # scripts
 generate-commits.sh
+
+# editor/workspace
+*.code-workspace
