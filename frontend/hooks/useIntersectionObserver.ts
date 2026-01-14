@@ -10,7 +10,7 @@ interface UseIntersectionObserverOptions {
 }
 
 interface UseIntersectionObserverReturn {
-  ref: RefObject<HTMLElement>;
+  ref: RefObject<HTMLElement | null>;
   isIntersecting: boolean;
   entry: IntersectionObserverEntry | null;
 }
@@ -21,7 +21,7 @@ export function useIntersectionObserver({
   rootMargin = "0px",
   freezeOnceVisible = false,
 }: UseIntersectionObserverOptions = {}): UseIntersectionObserverReturn {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
 
   const frozen = entry?.isIntersecting && freezeOnceVisible;

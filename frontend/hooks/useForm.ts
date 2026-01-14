@@ -1,15 +1,14 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
-import { FormState } from "@/types";
 
-type ValidationRule<T> = {
-  validate: (value: T[keyof T], values: T) => boolean;
+type ValidationRule<T, K extends keyof T = keyof T> = {
+  validate: (value: T[K], values: T) => boolean;
   message: string;
 };
 
 type FieldValidation<T> = {
-  [K in keyof T]?: ValidationRule<T>[];
+  [K in keyof T]?: ValidationRule<T, K>[];
 };
 
 interface UseFormOptions<T> {
@@ -40,11 +39,11 @@ export function useForm<T extends Record<string, unknown>>(options: UseFormOptio
   // Validate a single field
   const validateField = useCallback(
     (name: keyof T, value: T[keyof T]): string | undefined => {
-      const fieldValidations = validations[name];
+      const fieldValidations = (validations as FieldValidation<T>)[name];
       if (!fieldValidations) return undefined;
 
       for (const rule of fieldValidations) {
-        if (!rule.validate(value, values)) {
+        if (!rule.validate(value as never, values)) {
           return rule.message;
         }
       }
@@ -174,7 +173,7 @@ export function useForm<T extends Record<string, unknown>>(options: UseFormOptio
 
   const isValid = useMemo(() => Object.values(errors).every((e) => !e), [errors]);
 
-  const formState: FormState = {
+  const formState = {
     isDirty,
     isValid,
     isSubmitting,

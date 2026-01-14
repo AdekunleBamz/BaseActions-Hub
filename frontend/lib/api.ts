@@ -1,6 +1,11 @@
 // API client utilities for making HTTP requests
 
-import { ApiResponse } from "@/types";
+// Local API response type with status
+interface ApiResponse<T> {
+  data: T;
+  error: string | null;
+  status: number;
+}
 
 // API client configuration
 interface ApiClientConfig {
