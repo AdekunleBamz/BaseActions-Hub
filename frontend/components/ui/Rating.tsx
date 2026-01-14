@@ -1,7 +1,8 @@
 "use client";
 
 import { forwardRef, useState } from "react";
-import { cn } from "@/lib/utils";
+
+const cn = (...classes: (string | boolean | undefined)[]) => classes.filter(Boolean).join(" ");
 
 interface RatingProps {
   value?: number;

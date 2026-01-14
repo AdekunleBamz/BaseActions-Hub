@@ -1,7 +1,8 @@
 "use client";
 
 import { forwardRef, useState, useRef, useEffect, useCallback } from "react";
-import { cn } from "@/lib/utils";
+
+const cn = (...classes: (string | boolean | undefined)[]) => classes.filter(Boolean).join(" ");
 
 interface SliderProps {
   value?: number;

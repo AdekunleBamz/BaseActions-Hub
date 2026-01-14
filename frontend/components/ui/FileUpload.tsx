@@ -1,8 +1,9 @@
 "use client";
 
 import { forwardRef, useRef, useState, useCallback } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "./Button";
+
+const cn = (...classes: (string | boolean | undefined)[]) => classes.filter(Boolean).join(" ");
 
 interface FileUploadProps {
   onFilesSelected?: (files: File[]) => void;
