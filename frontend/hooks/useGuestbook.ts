@@ -3,6 +3,7 @@
 import { useReadContract } from "wagmi";
 import { CONTRACTS } from "@/config/contracts";
 import { GuestbookABI, LeaderboardABI } from "@/config/abis";
+import { MAX_SIGNATURES_PER_PAGE } from "@/lib/constants";
 
 export function useGuestbook(ownerAddress: string) {
   const { data: signatureCount, isLoading: loadingCount } = useReadContract({
@@ -16,7 +17,7 @@ export function useGuestbook(ownerAddress: string) {
     address: CONTRACTS.Guestbook,
     abi: GuestbookABI,
     functionName: "getSignatures",
-    args: [ownerAddress as `0x${string}`, BigInt(0), BigInt(50)],
+    args: [ownerAddress as `0x${string}`, BigInt(0), BigInt(MAX_SIGNATURES_PER_PAGE)],
   });
 
   const { data: ownerStats, isLoading: loadingStats } = useReadContract({
