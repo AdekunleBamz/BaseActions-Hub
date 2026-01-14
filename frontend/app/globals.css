@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Custom CSS Properties */
 :root {
   --primary: #3B82F6;
   --primary-dark: #0052FF;
