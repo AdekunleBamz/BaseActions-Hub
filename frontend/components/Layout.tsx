@@ -46,6 +46,8 @@ export function Header() {
 }
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="border-t border-white/5 mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -59,7 +61,7 @@ export function Footer() {
               className="rounded-lg"
             />
             <span className="text-sm text-gray-500">
-              Built on Base ⚡ Powered by Ethereum
+              © {currentYear} BaseActions Hub · Built on Base ⚡ Powered by Ethereum
             </span>
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-500">
