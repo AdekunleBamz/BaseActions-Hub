@@ -5,3 +5,4 @@ export { useUserBadges } from "./useUserBadges";
 export { useGuestbook } from "./useGuestbook";
 export { useCopyToClipboard } from "./useCopyToClipboard";
 export { useSignGuestbook } from "./useSignGuestbook";
+export { useLocalStorage } from "./useLocalStorage";
