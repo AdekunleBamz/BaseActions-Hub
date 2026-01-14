@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useAccount, useConnect } from "wagmi";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { useFarcaster } from "@/providers/FarcasterProvider";
 import { NavLinks, Logo, WalletButton } from "@/components";
 import { SOCIAL_LINKS } from "@/config/navigation";
@@ -96,7 +97,7 @@ export function Footer() {
   );
 }
 
-export function PageWrapper({ children }: { children: React.ReactNode }) {
+export function PageWrapper({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-pattern flex flex-col">
       <Header />
