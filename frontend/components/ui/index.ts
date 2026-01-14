@@ -1,3 +1,4 @@
+// Core components
 export { Button } from "./Button";
 export { Input } from "./Input";
 export { Textarea } from "./Textarea";
@@ -6,29 +7,47 @@ export { Badge } from "./Badge";
 export { Avatar } from "./Avatar";
 export { Spinner } from "./Spinner";
 export { Skeleton, SignatureCardSkeleton, StatCardSkeleton } from "./Skeleton";
-export { Tooltip } from "./Tooltip";
+
+// Overlay components
 export { Modal } from "./Modal";
+export { Drawer } from "./Drawer";
+export { Tooltip } from "./Tooltip";
+export { Popover } from "./Popover";
 export { Dropdown } from "./Dropdown";
+export { ConfirmDialog } from "./ConfirmDialog";
+
+// Form components
 export { Select } from "./Select";
-export { Tabs } from "./Tabs";
-export { Accordion } from "./Accordion";
-export { ToastProvider, useToast } from "./Toast";
 export { Switch } from "./Switch";
 export { Checkbox } from "./Checkbox";
 export { RadioGroup } from "./Radio";
-export { Progress, CircularProgress } from "./Progress";
-export { Drawer } from "./Drawer";
-export { Alert } from "./Alert";
-export { Breadcrumb, HomeIcon } from "./Breadcrumb";
-export { EmptyState } from "./EmptyState";
-export { Pagination } from "./Pagination";
-export { Tag, TagGroup } from "./Tag";
-export { Divider } from "./Divider";
-export { DataTable } from "./DataTable";
-export { SearchInput } from "./SearchInput";
-export { Popover } from "./Popover";
 export { NumberInput } from "./NumberInput";
+export { SearchInput } from "./SearchInput";
+export { Slider } from "./Slider";
+export { Rating } from "./Rating";
+export { FileUpload } from "./FileUpload";
+
+// Layout components
+export { Tabs } from "./Tabs";
+export { Accordion } from "./Accordion";
+export { Divider } from "./Divider";
+
+// Feedback components
+export { ToastProvider, useToast } from "./Toast";
+export { Alert } from "./Alert";
+export { Progress, CircularProgress } from "./Progress";
+
+// Navigation components
+export { Breadcrumb, HomeIcon } from "./Breadcrumb";
+export { Pagination } from "./Pagination";
 export { LinkButton } from "./LinkButton";
-export { IconButton } from "./IconButton";
+
+// Data display components
+export { DataTable } from "./DataTable";
+export { EmptyState } from "./EmptyState";
+export { Tag, TagGroup } from "./Tag";
 export { StatusIndicator } from "./StatusIndicator";
+
+// Utility components
+export { IconButton } from "./IconButton";
 export { CopyToClipboard, CopyField } from "./CopyToClipboard";
