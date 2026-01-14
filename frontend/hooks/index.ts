@@ -11,3 +11,7 @@ export { useMediaQuery, useIsMobile, useIsTablet, useIsDesktop, usePrefersDarkMo
 export { useDebounce, useDebouncedCallback } from "./useDebounce";
 export { useOnClickOutside } from "./useOnClickOutside";
 export { useIntersectionObserver, useLazyLoad } from "./useIntersectionObserver";
+export { useWindowScroll } from "./useWindowScroll";
+export { usePrevious } from "./usePrevious";
+export { useKeyPress, useHotkey, useEscapeKey, useEnterKey } from "./useKeyPress";
+export { useCountdown, useCountdownToDate } from "./useCountdown";
