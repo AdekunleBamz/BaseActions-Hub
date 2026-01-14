@@ -7,3 +7,8 @@ export { Avatar } from "./Avatar";
 export { Spinner } from "./Spinner";
 export { Skeleton, SignatureCardSkeleton, StatCardSkeleton } from "./Skeleton";
 export { Tooltip } from "./Tooltip";
+export { Modal } from "./Modal";
+export { Dropdown } from "./Dropdown";
+export { Select } from "./Select";
+export { Tabs } from "./Tabs";
+export { Accordion } from "./Accordion";
