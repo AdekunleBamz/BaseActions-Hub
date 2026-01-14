@@ -52,3 +52,77 @@ export function formatShortDate(timestamp: bigint | number): string {
     day: "numeric",
   });
 }
+
+/**
+ * Format time to 12-hour format
+ */
+export function formatTime(timestamp: bigint | number): string {
+  const time = typeof timestamp === "bigint" ? Number(timestamp) * 1000 : timestamp * 1000;
+  return new Date(time).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
+/**
+ * Format date and time together
+ */
+export function formatDateTime(timestamp: bigint | number): string {
+  const time = typeof timestamp === "bigint" ? Number(timestamp) * 1000 : timestamp * 1000;
+  return new Date(time).toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
+/**
+ * Get time until a future date
+ */
+export function getTimeUntil(futureDate: Date): { days: number; hours: number; minutes: number; seconds: number } | null {
+  const now = new Date();
+  const diff = futureDate.getTime() - now.getTime();
+  
+  if (diff <= 0) return null;
+  
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
+
+/**
+ * Check if a date is today
+ */
+export function isToday(timestamp: bigint | number): boolean {
+  const time = typeof timestamp === "bigint" ? Number(timestamp) * 1000 : timestamp * 1000;
+  const date = new Date(time);
+  const today = new Date();
+  return date.toDateString() === today.toDateString();
+}
+
+/**
+ * Check if a date is yesterday
+ */
+export function isYesterday(timestamp: bigint | number): boolean {
+  const time = typeof timestamp === "bigint" ? Number(timestamp) * 1000 : timestamp * 1000;
+  const date = new Date(time);
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  return date.toDateString() === yesterday.toDateString();
+}
+
+/**
+ * Get a human-friendly date label
+ */
+export function getDateLabel(timestamp: bigint | number): string {
+  if (isToday(timestamp)) return "Today";
+  if (isYesterday(timestamp)) return "Yesterday";
+  return formatShortDate(timestamp);
+}
