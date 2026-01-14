@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./animations.css";
+@import "./responsive.css";
 
 /* Custom CSS Properties */
 :root {
