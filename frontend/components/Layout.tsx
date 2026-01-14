@@ -1,17 +1,15 @@
 "use client";
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useAccount, useConnect } from "wagmi";
 import { useEffect } from "react";
 import { useFarcaster } from "@/providers/FarcasterProvider";
+import { NavLinks, Logo, WalletButton } from "@/components";
+import { SOCIAL_LINKS } from "@/config/navigation";
 
 export function Header() {
-  const pathname = usePathname();
-  const { isInMiniApp, isReady, displayName, pfpUrl } = useFarcaster();
-  const { address, isConnected } = useAccount();
+  const { isInMiniApp, isReady } = useFarcaster();
+  const { isConnected } = useAccount();
   const { connect, connectors } = useConnect();
 
   // Auto-connect in Farcaster miniapp
@@ -24,151 +22,24 @@ export function Header() {
     }
   }, [isInMiniApp, isReady, isConnected, connectors, connect]);
 
-  const navLinks = [
-    { href: "/", label: "Home", icon: "🏠" },
-    { href: "/sign", label: "Sign", icon: "✍️" },
-    { href: "/leaderboard", label: "Leaderboard", icon: "🏆" },
-    { href: "/stats", label: "Stats", icon: "📊" },
-  ];
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden glow-blue group-hover:scale-110 transition-transform">
-              <Image
-                src="/icon-512.png"
-                alt="BaseActions"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <span className="text-xl font-bold gradient-text hidden sm:block">
-              BaseActions
-            </span>
+            <Logo size="md" showText className="group-hover:scale-110 transition-transform" />
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  pathname === link.href
-                    ? "bg-blue-500/20 text-blue-400"
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                <span className="mr-1.5">{link.icon}</span>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <NavLinks variant="desktop" />
 
           {/* Connect Button - Different for Farcaster miniapp */}
-          {isInMiniApp ? (
-            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10">
-              {pfpUrl ? (
-                <Image
-                  src={pfpUrl}
-                  alt={displayName || "User"}
-                  width={24}
-                  height={24}
-                  className="rounded-full"
-                />
-              ) : (
-                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500" />
-              )}
-              <span className="text-sm font-medium">
-                {displayName || (isConnected && address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connecting...")}
-              </span>
-            </div>
-          ) : (
-            <ConnectButton.Custom>
-            {({
-              account,
-              chain,
-              openAccountModal,
-              openChainModal,
-              openConnectModal,
-              mounted,
-            }) => {
-              const ready = mounted;
-              const connected = ready && account && chain;
-
-              return (
-                <div
-                  {...(!ready && {
-                    "aria-hidden": true,
-                    style: {
-                      opacity: 0,
-                      pointerEvents: "none",
-                      userSelect: "none",
-                    },
-                  })}
-                >
-                  {(() => {
-                    if (!connected) {
-                      return (
-                        <button
-                          onClick={openConnectModal}
-                          className="btn-primary text-sm py-2.5 px-5"
-                        >
-                          <span>Connect</span>
-                        </button>
-                      );
-                    }
-
-                    if (chain.unsupported) {
-                      return (
-                        <button
-                          onClick={openChainModal}
-                          className="px-4 py-2.5 bg-red-500/20 text-red-400 rounded-xl text-sm font-medium border border-red-500/30"
-                        >
-                          Wrong network
-                        </button>
-                      );
-                    }
-
-                    return (
-                      <button
-                        onClick={openAccountModal}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 transition-all"
-                      >
-                        <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
-                        <span className="text-sm font-medium">
-                          {account.displayName}
-                        </span>
-                      </button>
-                    );
-                  })()}
-                </div>
-              );
-            }}
-          </ConnectButton.Custom>
-          )}
+          <WalletButton />
         </div>
 
         {/* Mobile Navigation */}
-        <nav className="flex md:hidden items-center justify-center gap-1 mt-3 pt-3 border-t border-white/5">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                pathname === link.href
-                  ? "bg-blue-500/20 text-blue-400"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              <span className="mr-1">{link.icon}</span>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <NavLinks variant="mobile" />
       </div>
     </header>
   );
@@ -193,7 +64,7 @@ export function Footer() {
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-500">
             <a
-              href="https://base.org"
+              href={SOCIAL_LINKS.base}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-400 transition"
@@ -201,7 +72,7 @@ export function Footer() {
               Base
             </a>
             <a
-              href="https://github.com/AdekunleBamz/BaseActions-Hub"
+              href={SOCIAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-400 transition"
@@ -209,7 +80,7 @@ export function Footer() {
               GitHub
             </a>
             <a
-              href="https://warpcast.com"
+              href={SOCIAL_LINKS.farcaster}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-purple-400 transition"
