@@ -2,20 +2,40 @@
 
 /* Custom CSS Properties */
 :root {
+  /* Primary colors */
   --primary: #3B82F6;
   --primary-dark: #0052FF;
   --secondary: #8B5CF6;
   --accent: #22D3EE;
+  
+  /* Status colors */
   --success: #10B981;
   --warning: #F59E0B;
   --danger: #EF4444;
+  
+  /* Background colors */
   --background: #030712;
   --surface: #0F172A;
   --surface-light: #1E293B;
   --border: #1E293B;
+  
+  /* Text colors */
   --text: #F8FAFC;
   --text-muted: #94A3B8;
   --text-dim: #64748B;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 9999px;
 }
 
 * {
