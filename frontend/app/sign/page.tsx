@@ -14,7 +14,8 @@ import {
   Textarea,
 } from "@/components";
 import { useSignGuestbook } from "@/hooks";
-import { MESSAGE_MAX_LENGTH } from "@/config/messages";
+import { MESSAGE_MAX_LENGTH, MESSAGE_MIN_LENGTH } from "@/config/messages";
+import { isValidAddress, isValidMessage } from "@/lib/validation";
 
 function SignForm() {
   const { isConnected, address } = useAccount();
@@ -52,6 +53,14 @@ function SignForm() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const addressError = guestbookOwner && !isValidAddress(guestbookOwner)
+    ? "Enter a valid 0x address"
+    : "";
+
+  const messageError = message && !isValidMessage(message, MESSAGE_MIN_LENGTH, MESSAGE_MAX_LENGTH)
+    ? `Message must be ${MESSAGE_MIN_LENGTH}-${MESSAGE_MAX_LENGTH} characters`
+    : "";
+
   return (
     <div className="max-w-lg mx-auto px-4 py-8">
       {/* Header */}
@@ -87,6 +96,7 @@ function SignForm() {
                 value={guestbookOwner}
                 onChange={(e) => setGuestbookOwner(e.target.value)}
                 className="pr-24"
+                error={addressError || undefined}
               />
               {guestbookOwner && (
                 <button
@@ -117,6 +127,7 @@ function SignForm() {
               rows={4}
               maxLength={MESSAGE_MAX_LENGTH}
               showCount
+              error={messageError || undefined}
             />
 
             <QuickMessages onSelect={setMessage} />
@@ -125,7 +136,7 @@ function SignForm() {
           {/* Sign Button */}
           <button
             onClick={handleSign}
-            disabled={!guestbookOwner || !message || isPending || isConfirming}
+            disabled={!guestbookOwner || !message || !!addressError || !!messageError || isPending || isConfirming}
             className="w-full btn-primary py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             <span className="flex items-center justify-center gap-2">
