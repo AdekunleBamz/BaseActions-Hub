@@ -1,5 +1,7 @@
 "use client";
 
+import { QUICK_MESSAGES } from "@/config/messages";
+
 interface QuickMessageProps {
   emoji: string;
   text: string;
@@ -22,22 +24,11 @@ interface QuickMessagesProps {
 }
 
 export function QuickMessages({ onSelect }: QuickMessagesProps) {
-  const messages = [
-    { emoji: "🔥", text: "Great vibes!" },
-    { emoji: "⚡", text: "Based and pilled" },
-    { emoji: "🚀", text: "To the moon!" },
-    { emoji: "💎", text: "Diamond hands" },
-    { emoji: "👋", text: "Hello from Base!" },
-    { emoji: "🎉", text: "Keep building!" },
-    { emoji: "💙", text: "Love this!" },
-    { emoji: "🌟", text: "You're awesome!" },
-  ];
-
   return (
     <div className="mt-4">
       <p className="text-xs text-gray-500 mb-3">Quick messages:</p>
       <div className="flex flex-wrap gap-2">
-        {messages.map((msg) => (
+        {QUICK_MESSAGES.map((msg) => (
           <QuickMessage
             key={msg.text}
             emoji={msg.emoji}
