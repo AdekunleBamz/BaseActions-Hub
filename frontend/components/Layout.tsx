@@ -24,11 +24,22 @@ export function Header() {
   }, [isInMiniApp, isReady, isConnected, connectors, connect]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass">
+    <header 
+      className="fixed top-0 left-0 right-0 z-50 glass"
+      role="banner"
+    >
+      {/* Skip to main content link for keyboard users */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link 
+            href="/" 
+            className="flex items-center gap-3 group"
+            aria-label="BaseActions Hub - Home"
+          >
             <Logo size="md" showText className="group-hover:scale-110 transition-transform" />
           </Link>
 
@@ -50,13 +61,16 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/5 mt-auto">
+    <footer 
+      className="border-t border-white/5 mt-auto"
+      role="contentinfo"
+    >
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Image
               src="/icon-512.png"
-              alt="BaseActions"
+              alt="BaseActions Hub logo"
               width={32}
               height={32}
               className="rounded-lg"
@@ -65,32 +79,40 @@ export function Footer() {
               © {currentYear} BaseActions Hub · Built on Base ⚡ Powered by Ethereum
             </span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-gray-500">
-            <a
-              href={SOCIAL_LINKS.base}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-400 transition"
-            >
-              Base
-            </a>
-            <a
-              href={SOCIAL_LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-400 transition"
-            >
-              GitHub
-            </a>
-            <a
-              href={SOCIAL_LINKS.farcaster}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-purple-400 transition"
-            >
-              Farcaster
-            </a>
-          </div>
+          <nav aria-label="Social links">
+            <ul className="flex items-center gap-6 text-sm text-gray-500 list-none">
+              <li>
+                <a
+                  href={SOCIAL_LINKS.base}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-400 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded px-1"
+                >
+                  Base
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SOCIAL_LINKS.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-400 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded px-1"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SOCIAL_LINKS.farcaster}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-purple-400 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded px-1"
+                >
+                  Farcaster
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>
@@ -122,9 +144,13 @@ export function PageWrapper({
     <div className="min-h-screen bg-pattern flex flex-col">
       <Header />
       <main 
+        id="main-content"
+        tabIndex={-1}
         className={`flex-1 pt-20 md:pt-20 ${showBottomNav ? "pb-20 md:pb-0" : ""} ${
           noPadding ? "" : "px-4"
-        }`}
+        } focus:outline-none`}
+        role="main"
+        aria-label="Main content"
       >
         <div className={`${maxWidthClasses[maxWidth]} mx-auto w-full`}>
           {children}
