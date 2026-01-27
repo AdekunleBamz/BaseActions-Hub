@@ -21,7 +21,7 @@ export { InfoBox, SigningInfoBox } from "./InfoBox";
 export { CTASection } from "./CTASection";
 export { GradientOrb, HeroBackground } from "./GradientOrb";
 export { Logo } from "./Logo";
-export { NavLinks } from "./NavLinks";
+export { NavLinks, BottomNavBar } from "./NavLinks";
 export { WalletButton } from "./WalletButton";
 export { StatsGrid } from "./StatsGrid";
 export { AddressDisplay } from "./AddressDisplay";
