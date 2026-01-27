@@ -9,7 +9,7 @@ export { TransactionLink, AddressLink } from "./ExplorerLinks";
 export { CopyButton, CopyableText } from "./CopyButton";
 export { PageHeader, PageHeaderCompact } from "./PageHeader";
 export { SectionHeader } from "./SectionHeader";
-export { FeatureCard } from "./FeatureCard";
+export { FeatureCard, FeatureCardGrid } from "./FeatureCard";
 export { HowItWorksStep, HowItWorksSection } from "./HowItWorks";
 export { BadgeDisplay, BadgeGrid } from "./BadgeDisplay";
 export { PointsItem, PointsSystemSection } from "./PointsSystem";
