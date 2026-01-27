@@ -44,7 +44,7 @@ contract BaseActionsHub is Ownable, ReentrancyGuard, Pausable {
     ILeaderboard public leaderboard;
 
     // Fees
-    uint256 public signFee = 0.0001 ether;
+    uint256 public signFee = 0.000001 ether;
     uint256 public platformFeePercent = 10; // 10%
 
     // Stats

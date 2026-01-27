@@ -586,7 +586,7 @@ contract BaseActionsHub is Ownable, ReentrancyGuard, Pausable {
     IBadgeNFT public badgeNFT;
     ILeaderboard public leaderboard;
 
-    uint256 public signFee = 0.0001 ether;
+    uint256 public signFee = 0.000001 ether;
     uint256 public platformFeePercent = 10;
     uint256 public totalActions;
     uint256 public totalFeesCollected;
@@ -902,7 +902,7 @@ export const CONTRACTS = {
 | Issue | Solution |
 |-------|----------|
 | "Not authorized" | Ensure Hub is authorized in all 3 contracts |
-| "Insufficient fee" | Send at least 0.0001 ETH with signAndEarn |
+| "Insufficient fee" | Send at least 0.000001 ETH with signAndEarn |
 | Transaction fails | Check you have enough Base Sepolia ETH |
 | Contract not found | Verify addresses are correct in Hub constructor |
 
