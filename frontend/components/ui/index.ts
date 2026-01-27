@@ -6,7 +6,7 @@ export { Card } from "./Card";
 export { Badge } from "./Badge";
 export { Avatar } from "./Avatar";
 export { Spinner } from "./Spinner";
-export { Skeleton, SignatureCardSkeleton, StatCardSkeleton } from "./Skeleton";
+export { Skeleton, SignatureCardSkeleton, StatCardSkeleton, BadgeCardSkeleton, LeaderboardRowSkeleton } from "./Skeleton";
 
 // Overlay components
 export { Modal } from "./Modal";

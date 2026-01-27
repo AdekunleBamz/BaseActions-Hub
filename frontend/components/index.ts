@@ -1,7 +1,7 @@
 export { Header, Footer, PageWrapper, StatCard } from "./Layout";
 export { EmptyState } from "./EmptyState";
 export { ErrorState } from "./ErrorState";
-export { LoadingState, PageLoadingState } from "./LoadingState";
+export { LoadingState, PageLoadingState, InlineLoadingState } from "./LoadingState";
 export { ConnectWalletPrompt } from "./ConnectWalletPrompt";
 export { SignatureCard } from "./SignatureCard";
 export { SignatureList } from "./SignatureList";
