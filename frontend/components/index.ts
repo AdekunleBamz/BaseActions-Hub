@@ -28,6 +28,13 @@ export { AddressDisplay } from "./AddressDisplay";
 export { TrustBadges } from "./TrustBadges";
 export { HeroSection } from "./HeroSection";
 export { ComingSoon } from "./ComingSoon";
+
+// User feedback components
+export { ToastProvider, useToast, useToastActions } from "./Toast";
+export { ConfirmDialog, useConfirmDialog } from "./ConfirmDialog";
+export { TransactionStatus, TransactionStatusInline } from "./TransactionStatus";
+export { VirtualList, useLazyLoad } from "./VirtualList";
+
 export {
 	Button,
 	Input,
