@@ -19,3 +19,6 @@ export * from "./accessibility";
 
 // Performance utilities
 export * from "./performance";
+
+// Analytics utilities
+export * from "./analytics";

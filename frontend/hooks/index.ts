@@ -72,3 +72,15 @@ export {
   useLatest,
   useSingleton,
 } from "./usePerformance";
+
+// Analytics hooks
+export {
+  usePageTracking,
+  useEventTracking,
+  useUserTracking,
+  useTimingTracking,
+  useClickTracking,
+  useFormTracking,
+  useScrollTracking,
+  useVisibilityTracking,
+} from "./useAnalytics";
