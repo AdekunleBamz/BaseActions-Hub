@@ -1,12 +1,39 @@
 // Configuration
 export * from "./constants";
+export * from "./env";
 
-// Formatting utilities
-export * from "./format";
-export * from "./time";
+// Core Utilities
+export * from "./numbers";
+export * from "./strings";
+export * from "./arrays";
+export * from "./objects";
+export * from "./async";
+export * from "./storage";
+export * from "./datetime";
+export * from "./colors";
+export * from "./logger";
 
-// Validation utilities
-export * from "./validation";
+// Domain Specific Utilities
+export { formatAddress, formatEth } from "./format";
+export { 
+  isValidAddress, 
+  isValidTxHash, 
+  isValidMessage, 
+  isValidEmail, 
+  isValidUrl,
+  isValidDate,
+  isValidUUID,
+  isPositiveNumber,
+  isNonNegativeNumber,
+  checkPasswordStrength,
+  isValidFileSize,
+  isValidFileType,
+  hasRequiredKeys,
+  stringValidator,
+  numberValidator,
+  arrayValidator,
+  isFloat
+} from "./validation";
 
 // Animation utilities
 export * from "./animations";

@@ -164,12 +164,6 @@ export function createTransition(
 // Animation state types
 export type AnimationState = "idle" | "entering" | "entered" | "exiting" | "exited";
 
-// Reduced motion check
-export function prefersReducedMotion(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
 // Get animation with reduced motion fallback
 export function getAccessibleAnimation<T>(
   animation: T,

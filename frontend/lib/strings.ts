@@ -141,13 +141,6 @@ export function uncapitalize(str: string): string {
 // ============================================================================
 
 /**
- * Check if string is empty or only whitespace
- */
-export function isEmpty(str: string | null | undefined): boolean {
-  return !str || str.trim().length === 0;
-}
-
-/**
  * Check if string contains only alphanumeric characters
  */
 export function isAlphanumeric(str: string): boolean {
