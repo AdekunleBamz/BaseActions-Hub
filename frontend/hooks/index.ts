@@ -97,3 +97,8 @@ export {
   useTransactionToast,
   useGasEstimation,
 } from "./useWeb3";
+
+// New Utility Hooks
+export { useLogger, useLogChanges } from "./useLogger";
+export { useMount, useUnmount, useUpdateEffect, useIsMounted, useLifecycleLogger } from "./useLifecycle";
+export { useArray } from "./useArray";
