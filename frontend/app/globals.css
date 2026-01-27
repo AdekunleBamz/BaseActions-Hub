@@ -38,6 +38,9 @@
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-full: 9999px;
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 2px var(--background), 0 0 0 4px var(--primary);
 }
 
 * {
@@ -46,6 +49,76 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  :root {
+    --primary: #60A5FA;
+    --secondary: #A78BFA;
+    --text: #FFFFFF;
+    --text-muted: #E2E8F0;
+    --border: #475569;
+  }
+  
+  .glass {
+    background: rgba(15, 23, 42, 0.95);
+    border: 2px solid var(--border);
+  }
 }
 
 body {

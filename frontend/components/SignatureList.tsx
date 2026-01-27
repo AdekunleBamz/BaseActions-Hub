@@ -14,10 +14,16 @@ interface SignatureListProps {
 export function SignatureList({ signatures, isLoading, guestbookAddress }: SignatureListProps) {
   if (isLoading) {
     return (
-      <div className="space-y-4">
+      <div 
+        className="space-y-4"
+        role="status"
+        aria-label="Loading signatures"
+        aria-busy="true"
+      >
         {[...Array(3)].map((_, i) => (
           <SignatureCardSkeleton key={i} />
         ))}
+        <span className="sr-only">Loading signatures...</span>
       </div>
     );
   }
@@ -38,7 +44,11 @@ export function SignatureList({ signatures, isLoading, guestbookAddress }: Signa
   }
 
   return (
-    <div className="space-y-4">
+    <section 
+      className="space-y-4"
+      aria-label={`${signatures.length} signature${signatures.length !== 1 ? 's' : ''}`}
+    >
+      <h2 className="sr-only">Signatures ({signatures.length})</h2>
       {[...signatures].reverse().map((sig, i) => (
         <div
           key={i}
@@ -47,6 +57,6 @@ export function SignatureList({ signatures, isLoading, guestbookAddress }: Signa
           <SignatureCard signature={sig} />
         </div>
       ))}
-    </div>
+    </section>
   );
 }
