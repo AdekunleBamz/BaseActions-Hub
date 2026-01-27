@@ -7,7 +7,7 @@ export { SignatureCard } from "./SignatureCard";
 export { SignatureList } from "./SignatureList";
 export { TransactionLink, AddressLink } from "./ExplorerLinks";
 export { CopyButton, CopyableText } from "./CopyButton";
-export { PageHeader } from "./PageHeader";
+export { PageHeader, PageHeaderCompact } from "./PageHeader";
 export { SectionHeader } from "./SectionHeader";
 export { FeatureCard } from "./FeatureCard";
 export { HowItWorksStep, HowItWorksSection } from "./HowItWorks";
