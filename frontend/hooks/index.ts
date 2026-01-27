@@ -44,3 +44,15 @@ export { useHover, useFocus, useActive } from "./useInteraction";
 // Scroll hooks
 export { useScrollLock, useScrollDirection, useScrollTo } from "./useScrollHelpers";
 
+// Accessibility hooks
+export {
+  useFocusTrap,
+  useFocusRestore,
+  useAnnounce,
+  useRovingTabindex,
+  useReducedMotion,
+  useAriaLive,
+  useTabNavigation,
+  useSkipLink,
+  useKeyboardUser,
+} from "./useAccessibility";
