@@ -1,5 +1,5 @@
 export { Header, Footer, PageWrapper, StatCard } from "./Layout";
-export { EmptyState } from "./EmptyState";
+export { EmptyState, NoSignaturesEmpty, NoBadgesEmpty, NoConnectionEmpty } from "./EmptyState";
 export { ErrorState, NetworkError, TransactionError } from "./ErrorState";
 export { LoadingState, PageLoadingState, InlineLoadingState } from "./LoadingState";
 export { ConnectWalletPrompt } from "./ConnectWalletPrompt";
@@ -7,9 +7,9 @@ export { SignatureCard } from "./SignatureCard";
 export { SignatureList } from "./SignatureList";
 export { TransactionLink, AddressLink } from "./ExplorerLinks";
 export { CopyButton, CopyableText } from "./CopyButton";
-export { PageHeader } from "./PageHeader";
+export { PageHeader, PageHeaderCompact } from "./PageHeader";
 export { SectionHeader } from "./SectionHeader";
-export { FeatureCard } from "./FeatureCard";
+export { FeatureCard, FeatureCardGrid } from "./FeatureCard";
 export { HowItWorksStep, HowItWorksSection } from "./HowItWorks";
 export { BadgeDisplay, BadgeGrid } from "./BadgeDisplay";
 export { PointsItem, PointsSystemSection } from "./PointsSystem";
