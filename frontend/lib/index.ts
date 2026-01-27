@@ -22,3 +22,6 @@ export * from "./performance";
 
 // Analytics utilities
 export * from "./analytics";
+
+// Environment configuration
+export * from "./env";
