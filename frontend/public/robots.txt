@@ -1,0 +1,16 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow API and internal routes
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap
+Sitemap: https://baseactions.xyz/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Host
+Host: https://baseactions.xyz
