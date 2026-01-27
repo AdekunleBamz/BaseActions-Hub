@@ -14,3 +14,5 @@ export * from "./animations";
 // API utilities
 export * from "./api";
 
+// Accessibility utilities
+export * from "./accessibility";
