@@ -25,3 +25,32 @@ export * from "./analytics";
 
 // Environment configuration
 export * from "./env";
+
+// Web3 utilities (explicit exports to avoid conflicts)
+export {
+  shortenAddress,
+  addressesEqual,
+  toChecksumAddress,
+  formatTxHash,
+  getTransactionUrl,
+  getAddressUrl,
+  getBlockUrl,
+  formatGasPrice,
+  parseEth,
+  calculateTxCost,
+  chains,
+  getChainInfo,
+  getChainName,
+  isChainSupported,
+  getMainnetChains,
+  getTestnetChains,
+  createTypedData,
+  createPersonalSignMessage,
+  isEnsName,
+  formatAddressOrEns,
+  parseWeb3Error,
+  getErrorMessage,
+  type ChainInfo,
+  type TransactionStatus,
+  type Web3Error,
+} from "./web3";

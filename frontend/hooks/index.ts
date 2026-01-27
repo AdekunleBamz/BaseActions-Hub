@@ -84,3 +84,16 @@ export {
   useScrollTracking,
   useVisibilityTracking,
 } from "./useAnalytics";
+
+// Web3 hooks
+export {
+  useWalletStatus,
+  useChainSwitch,
+  useTransactionState,
+  useBlockNumber,
+  useIsOwner,
+  useAddressMatch,
+  useWeb3Error,
+  useTransactionToast,
+  useGasEstimation,
+} from "./useWeb3";
