@@ -2,11 +2,20 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import Link from "next/link";
+import { useAccount } from "wagmi";
 import { PageWrapper } from "@/components/Layout";
-import { CONTRACTS, ACTION_COST } from "@/config/contracts";
-import { BaseActionsHubABI } from "@/config/abis";
+import {
+  ConnectWalletPrompt,
+  InfoBox,
+  Input,
+  PageHeader,
+  QuickMessages,
+  SignSuccessState,
+  Textarea,
+} from "@/components";
+import { useSignGuestbook } from "@/hooks";
+import { MESSAGE_MAX_LENGTH, MESSAGE_MIN_LENGTH } from "@/config/messages";
+import { isValidAddress, isValidMessage } from "@/lib/validation";
 
 function SignForm() {
   const { isConnected, address } = useAccount();
@@ -23,34 +32,20 @@ function SignForm() {
     }
   }, [searchParams]);
 
-  const { data: hash, writeContract, isPending, error } = useWriteContract();
-
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
+  const {
+    signGuestbook,
     hash,
-  });
+    isPending,
+    isConfirming,
+    isSuccess,
+    error,
+    reset,
+  } = useSignGuestbook();
 
   const handleSign = () => {
     if (!guestbookOwner || !message) return;
-
-    writeContract({
-      address: CONTRACTS.BaseActionsHub,
-      abi: BaseActionsHubABI,
-      functionName: "signGuestbook",
-      args: [guestbookOwner as `0x${string}`, message],
-      value: ACTION_COST,
-    });
+    signGuestbook(guestbookOwner, message);
   };
-
-  const quickMessages = [
-    { emoji: "🔥", text: "Great vibes!" },
-    { emoji: "⚡", text: "Based and pilled" },
-    { emoji: "🚀", text: "To the moon!" },
-    { emoji: "💎", text: "Diamond hands" },
-    { emoji: "👋", text: "Hello from Base!" },
-    { emoji: "🎉", text: "Keep building!" },
-    { emoji: "💙", text: "Love this!" },
-    { emoji: "🌟", text: "You're awesome!" },
-  ];
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(guestbookOwner);
@@ -58,106 +53,50 @@ function SignForm() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const addressError = guestbookOwner && !isValidAddress(guestbookOwner)
+    ? "Enter a valid 0x address"
+    : "";
+
+  const messageError = message && !isValidMessage(message, MESSAGE_MIN_LENGTH, MESSAGE_MAX_LENGTH)
+    ? `Message must be ${MESSAGE_MIN_LENGTH}-${MESSAGE_MAX_LENGTH} characters`
+    : "";
+
   return (
     <div className="max-w-lg mx-auto px-4 py-8">
       {/* Header */}
-      <div className="text-center mb-10">
-        <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-4xl animate-float">
-          ✍️
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
-          Sign a Guestbook
-        </h1>
-        <p className="text-gray-400">
-          Leave your mark on-chain for just <span className="text-blue-400 font-semibold">0.0001 ETH</span>
-        </p>
-      </div>
+      <PageHeader
+        icon="✍️"
+        title="Sign a Guestbook"
+        description="Leave your mark on-chain for just 0.0001 ETH"
+      />
 
       {!isConnected ? (
-        /* Connect Wallet State */
-        <div className="glass rounded-2xl p-8 text-center">
-          <div className="text-5xl mb-4">🔗</div>
-          <h2 className="text-xl font-bold text-white mb-2">Connect Your Wallet</h2>
-          <p className="text-gray-400 mb-6">
-            Connect your wallet to start signing guestbooks
-          </p>
-          <div className="badge badge-blue">Supports MetaMask, Coinbase, and more</div>
-        </div>
+        <ConnectWalletPrompt
+          title="Connect Your Wallet"
+          description="Connect your wallet to start signing guestbooks"
+        />
       ) : isSuccess ? (
-        /* Success State */
-        <div className="glass rounded-2xl p-8 text-center overflow-hidden relative">
-          {/* Confetti effect */}
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-2 h-2 rounded-full animate-float"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  backgroundColor: ['#3B82F6', '#8B5CF6', '#22D3EE', '#10B981'][i % 4],
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`,
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="relative">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-4xl glow-cyan">
-              🎉
-            </div>
-            <h2 className="text-2xl font-bold text-white mb-2">Signed Successfully!</h2>
-            <p className="text-gray-400 mb-6">
-              Your signature is now on-chain forever!<br />
-              You may have earned a badge 🏅
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button
-                onClick={() => window.location.reload()}
-                className="btn-primary py-3 px-6"
-              >
-                <span>Sign Another ✍️</span>
-              </button>
-              <Link
-                href={`/guestbook/${guestbookOwner}`}
-                className="btn-secondary py-3 px-6 text-center"
-              >
-                View Guestbook 📖
-              </Link>
-            </div>
-
-            {hash && (
-              <div className="mt-6 pt-6 border-t border-white/10">
-                <p className="text-xs text-gray-500 mb-2">Transaction Hash</p>
-                <a
-                  href={`https://basescan.org/tx/${hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-blue-400 hover:text-blue-300 font-mono break-all"
-                >
-                  {hash}
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
+        <SignSuccessState
+          hash={hash}
+          guestbookOwner={guestbookOwner}
+          onReset={() => {
+            reset();
+            setMessage("");
+          }}
+        />
       ) : (
         /* Sign Form */
         <div className="space-y-6">
           {/* Guestbook Owner Input */}
           <div className="glass rounded-2xl p-6">
-            <label className="block text-sm font-medium text-gray-300 mb-3">
-              Guestbook Owner Address
-            </label>
             <div className="relative">
-              <input
-                type="text"
+              <Input
+                label="Guestbook Owner Address"
                 placeholder="0x..."
                 value={guestbookOwner}
                 onChange={(e) => setGuestbookOwner(e.target.value)}
-                className="input-modern pr-24"
+                className="pr-24"
+                error={addressError || undefined}
               />
               {guestbookOwner && (
                 <button
@@ -168,14 +107,10 @@ function SignForm() {
                 </button>
               )}
             </div>
-            
-            {/* Quick fill buttons */}
+
             <div className="flex flex-wrap gap-2 mt-4">
               {address && (
-                <button
-                  onClick={() => setGuestbookOwner(address)}
-                  className="pill text-xs"
-                >
+                <button onClick={() => setGuestbookOwner(address)} className="pill text-xs">
                   📍 Use my address
                 </button>
               )}
@@ -184,43 +119,24 @@ function SignForm() {
 
           {/* Message Input */}
           <div className="glass rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-3">
-              <label className="block text-sm font-medium text-gray-300">
-                Your Message
-              </label>
-              <span className={`text-xs ${message.length > 250 ? 'text-orange-400' : 'text-gray-500'}`}>
-                {message.length}/280
-              </span>
-            </div>
-            <textarea
+            <Textarea
+              label="Your Message"
               placeholder="Write something nice..."
               value={message}
-              onChange={(e) => setMessage(e.target.value.slice(0, 280))}
+              onChange={(e) => setMessage(e.target.value.slice(0, MESSAGE_MAX_LENGTH))}
               rows={4}
-              className="input-modern resize-none"
+              maxLength={MESSAGE_MAX_LENGTH}
+              showCount
+              error={messageError || undefined}
             />
 
-            {/* Quick Messages */}
-            <div className="mt-4">
-              <p className="text-xs text-gray-500 mb-3">Quick messages:</p>
-              <div className="flex flex-wrap gap-2">
-                {quickMessages.map((msg) => (
-                  <button
-                    key={msg.text}
-                    onClick={() => setMessage(`${msg.emoji} ${msg.text}`)}
-                    className="pill text-xs hover:scale-105 transition-transform"
-                  >
-                    {msg.emoji} {msg.text}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <QuickMessages onSelect={setMessage} />
           </div>
 
           {/* Sign Button */}
           <button
             onClick={handleSign}
-            disabled={!guestbookOwner || !message || isPending || isConfirming}
+            disabled={!guestbookOwner || !message || !!addressError || !!messageError || isPending || isConfirming}
             className="w-full btn-primary py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             <span className="flex items-center justify-center gap-2">
@@ -246,27 +162,21 @@ function SignForm() {
             </span>
           </button>
 
-          {/* Error State */}
           {error && (
-            <div className="glass rounded-xl p-4 border border-red-500/30 bg-red-500/10">
-              <div className="flex items-start gap-3">
-                <span className="text-red-400">❌</span>
-                <p className="text-sm text-red-400">{error.message.slice(0, 100)}</p>
-              </div>
-            </div>
+            <InfoBox icon="❌" variant="error">
+              <p>{error.message.slice(0, 100)}</p>
+            </InfoBox>
           )}
 
-          {/* Info Box */}
-          <div className="glass rounded-xl p-4">
-            <div className="flex items-center gap-3 text-sm">
-              <span className="text-2xl">💡</span>
-              <div className="text-gray-400">
-                <p><span className="text-green-400">90%</span> goes to the guestbook owner</p>
-                <p><span className="text-blue-400">10%</span> platform fee</p>
-                <p className="text-purple-400 mt-1">First signature earns you a SIGNER badge! 🏅</p>
-              </div>
-            </div>
-          </div>
+          <InfoBox icon="💡">
+            <p>
+              <span className="text-green-400">90%</span> goes to the guestbook owner
+            </p>
+            <p>
+              <span className="text-blue-400">10%</span> platform fee
+            </p>
+            <p className="text-purple-400 mt-1">First signature earns you a SIGNER badge! 🏅</p>
+          </InfoBox>
         </div>
       )}
     </div>
