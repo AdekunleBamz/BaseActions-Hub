@@ -8,6 +8,7 @@ export { useSignGuestbook } from "./useSignGuestbook";
 
 // Utility hooks
 export { useCopyToClipboard } from "./useCopyToClipboard";
+export { useClipboard } from "./useClipboard";
 export { useLocalStorage } from "./useLocalStorage";
 export { useDisclosure } from "./useDisclosure";
 
@@ -33,4 +34,13 @@ export { usePrevious } from "./usePrevious";
 export { useCountdown, useCountdownToDate } from "./useCountdown";
 export { useAsync, useAsyncCallback } from "./useAsync";
 export { useForm, formValidators } from "./useForm";
+
+// Network hooks
+export { useNetwork, useOnReconnect } from "./useNetwork";
+
+// Interaction hooks
+export { useHover, useFocus, useActive } from "./useInteraction";
+
+// Scroll hooks
+export { useScrollLock, useScrollDirection, useScrollTo } from "./useScrollHelpers";
 
