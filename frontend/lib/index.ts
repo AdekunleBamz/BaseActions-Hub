@@ -16,3 +16,6 @@ export * from "./api";
 
 // Accessibility utilities
 export * from "./accessibility";
+
+// Performance utilities
+export * from "./performance";

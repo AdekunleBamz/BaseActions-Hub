@@ -56,3 +56,19 @@ export {
   useSkipLink,
   useKeyboardUser,
 } from "./useAccessibility";
+
+// Performance hooks
+export {
+  useMemoizedCallback,
+  useThrottledCallback,
+  useRafCallback,
+  useIdleCallback,
+  useDeferredValuePolyfill,
+  useVirtualList,
+  useMeasure,
+  useImagePreload,
+  useIsomorphicLayoutEffect,
+  useMountedState,
+  useLatest,
+  useSingleton,
+} from "./usePerformance";
